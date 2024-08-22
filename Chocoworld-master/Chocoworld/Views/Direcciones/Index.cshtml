@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Chocoworld.Models.Direccione>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h1>Direcciones</h1>
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear Direccion</a>
+</p>
+<form asp-controller="direcciones" asp-action="Index">
+    <p>
+        <label class="form-label" for="form1">Buscar</label>
+        <input type="search" id="form1" name="buscar" class="form-control" />
+        <input type="submit" value="Buscar" class="btn btn-primary m-1" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Calle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zona)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClienteId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClienteId)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.DireccionId">Editar</a> |
+                <a asp-action="Details" class="btn btn-warning" asp-route-id="@item.DireccionId">Detalles</a> |
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.DireccionId">Eliminar</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

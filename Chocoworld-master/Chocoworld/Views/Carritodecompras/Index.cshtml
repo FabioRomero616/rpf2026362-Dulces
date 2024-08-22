@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Chocoworld.Models.Carritodecompra>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.ClienteId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.ProductoId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CarritoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CarritoId">Details</a> 
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.CarritoId">Eliminar</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

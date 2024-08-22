@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Chocomundo";
+}
+@model Chocoworld.Models.Comentariosproducto
+
+
+
+<!-- Page Header End -->
+<!-- Reservation Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="reservation position-relative overlay-top overlay-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6 my-5 my-lg-0">
+                    <div class="p-5">
+                        <div class="mb-4">
+                            <h1 class="text-white">Ayudanos a crecer</h1>
+
+                            <h1 class="text-white">Comenta algun producto</h1>
+                        </div>
+                        <img class="img-fluid" src="~/img/logo chocomundo.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                        <h1 class="text-white mb-4 mt-5"></h1>
+                        <form asp-action="ComentarProducto">
+                            <div class="form-group">
+                                <label asp-for="ProductoId" class="control-label">Nombre Producto</label>
+                                <select asp-for="ProductoId" class="form-control" asp-items="ViewBag.ProductoId"></select>
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Comentario" class="control-label">Comentario</label>
+                                <input asp-for="Comentario" class="form-control" />
+                                <span asp-validation-for="Comentario" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Valoracion" class="control-label">Valoracion</label>
+                                <input asp-for="Valoracion" class="form-control" />
+                                <span asp-validation-for="Valoracion" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FechaComentario" class="control-label">Fecha</label>
+                                <input asp-for="FechaComentario" class="form-control" />
+                                <span asp-validation-for="FechaComentario" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="submit" value="Comentar" class="btn btn-primary" />
+                            </div>
+                            @if (TempData["mensaje"] != null)
+                            {
+                                <div id="mensaje" class="alert alert-success">@TempData["mensaje"]</div>
+
+                                <script>
+
+                                    setTimeout(function () {
+                                        document.getElementById("mensaje").style.display = "none";
+                                    }, 5000);
+                                </script>
+                            }
+                           
+                        </form>
+                        <script>
+                            window.onload = function () {
+                                var fechaComentario = document.querySelector('input[name="FechaComentario"]');
+
+                                // Obtener la fecha actual en GMT-4
+                                var fechaActual = new Date(new Date().getTime() - (4 * 60 * 60 * 1000)).toISOString().slice(0, 16);
+
+                                fechaComentario.value = fechaActual;
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<lu>
+    <li>
+        <a asp-action="Index" asp-area="">
+            <button type="button" class="btn btn-block btn btn-secondary rounded-bottom text-white">Volver Pagina de Inicio</button>
+        </a>
+    </li>
+    <li>
+        <a asp-action="Perfil" asp-area="">
+            <button type="button" class="btn btn-block btn btn-primary rounded-bottom text-white">Volver Perfil de usuario</button>
+        </a>
+    </li>
+</lu>

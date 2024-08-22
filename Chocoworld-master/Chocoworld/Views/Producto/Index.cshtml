@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Chocoworld.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_layout1.cshtml";
+
+}
+
+
+<h1>Productos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear Producto</a>
+</p>
+<form asp-controller="Producto" asp-action="Index">
+    <p>
+        <label class="form-label" for="form1">Buscar</label>
+        <input type="search" id="form1" name="buscar" class="form-control" />
+        <input type="submit" value="Buscar" class="btn btn-primary m-1" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaId)
+            </td>
+            <td>
+                    <a asp-action="Edit" class="btn btn-primary rounded" asp-route-id="@item.ProductoId">Editar</a>
+                    <a asp-action="Details" class="btn btn-warning rounded" asp-route-id="@item.ProductoId">Detalles</a>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <a asp-action="Delete" class="btn btn-danger rounded" asp-route-id="@item.ProductoId">Eliminar</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

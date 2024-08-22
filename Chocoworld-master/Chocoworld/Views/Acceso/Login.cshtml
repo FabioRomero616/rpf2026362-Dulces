@@ -1,0 +1,174 @@
+﻿@model Chocoworld.Models.Cliente
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Iniciar Sesión - Registrarse</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F5E6CA;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-container {
+            background-color: #EADFC5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 100px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #5E3F27;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .nav-tabs .nav-link {
+            color: #5E3F27;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3 form-container">
+                <h1>¡Bienvenido!</h1>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login-form" role="tab" aria-controls="login-form" aria-selected="true">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="register-tab" data-toggle="tab" href="#register-form" role="tab" aria-controls="register-form" aria-selected="false">Registrarse</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login-form" role="tabpanel" aria-labelledby="login-tab">
+                        <form method="post" asp-action="Login" asp-controller ="Acceso">
+                            <!-- Asegúrate de que la acción del formulario coincida con la ruta del controlador -->
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" name="CorreoElectronico" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="Contraseña">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane fade" id="register-form" role="tabpanel" aria-labelledby="register-tab">
+                        <form asp-action="Create" id="registrationForm">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Nombre" class="control-label"></label>
+                                <input asp-for="Nombre" class="form-control" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Apellido" class="control-label"></label>
+                                <input asp-for="Apellido" class="form-control" />
+                                <span asp-validation-for="Apellido" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Contrasena" class="control-label"></label>
+                                <input asp-for="Contrasena" type="password" class="form-control" id="password" />
+                                <span asp-validation-for="Contrasena" class="text-danger"></span>
+                                <div id="passwordStrength" class="mt-2"></div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ConfirmarContrasena" class="control-label"></label>
+                                <input type="password" class="form-control" name="ConfirmarContrasena" />
+                                <span asp-validation-for="ConfirmarContrasena" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Telefono" class="control-label"></label>
+                                <input asp-for="Telefono" class="form-control" />
+                                <span asp-validation-for="Telefono" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Registrarse" class="btn btn-primary" />
+                            </div>
+                        </form>
+
+                        <script>
+                            // Agrega el script para la validación de la contraseña
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const passwordInput = document.getElementById("password");
+                                const passwordStrength = document.getElementById("passwordStrength");
+
+                                passwordInput.addEventListener("input", function () {
+                                    const password = passwordInput.value;
+                                    const strength = calculatePasswordStrength(password);
+                                    updatePasswordStrength(strength);
+                                });
+
+                                function calculatePasswordStrength(password) {
+                                    // Lógica para calcular la fuerza de la contraseña
+                                    // Puedes personalizar este método según tus requisitos
+                                    let strength = 0;
+
+                                    if (password.length >= 8) {
+                                        strength += 1;
+                                    }
+
+                                    if (/[A-Z]/.test(password)) {
+                                        strength += 1;
+                                    }
+
+                                    if (/\d/.test(password)) {
+                                        strength += 1;
+                                    }
+
+                                    return strength;
+                                }
+
+                                function updatePasswordStrength(strength) {
+                                    // Actualiza el elemento HTML para mostrar la fuerza de la contraseña
+                                    // Puedes personalizar cómo se muestra la fuerza aquí
+                                    let strengthText = "Débil";
+                                    let strengthClass = "text-danger";
+
+                                    if (strength >= 2) {
+                                        strengthText = "Moderada";
+                                        strengthClass = "text-warning";
+                                    }
+
+                                    if (strength === 3) {
+                                        strengthText = "Fuerte";
+                                        strengthClass = "text-success";
+                                    }
+
+                                    passwordStrength.textContent = `Fuerza de la contraseña: ${strengthText}`;
+                                    passwordStrength.className = strengthClass;
+                                }
+                            });
+                        </script>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

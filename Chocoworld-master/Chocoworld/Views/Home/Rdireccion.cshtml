@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Chocomundo";
+}
+@model Chocoworld.Models.Direccione
+
+
+
+<!-- Page Header End -->
+<!-- Reservation Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="reservation position-relative overlay-top overlay-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6 my-5 my-lg-0">
+                    <div class="p-5">
+                        <div class="mb-4">
+                            <h1 class="text-white">Registra tu direccion</h1>
+                        
+                            <h1 class="text-white"></h1>
+                        </div>
+                        <img class="img-fluid" src="~/img/logo chocomundo.jpeg" alt="">                       
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                        <h1 class="text-white mb-4 mt-5">Nueva direccion</h1>
+                        <form asp-action="CreateDireccion" >
+                            
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Calle" class="control-label  text-white"></label>
+                                <input asp-for="Calle" class="form-control" />
+                                <span asp-validation-for="Calle" class="text-warning"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Zona" class="control-label text-white"></label>
+                                <input asp-for="Zona" class="form-control" />
+                                <span asp-validation-for="Zona" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Ciudad" class="control-label text-white"></label>
+                                <input asp-for="Ciudad" class="form-control" />
+                                <span asp-validation-for="Ciudad" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Crear" class="btn btn-success rounded-3" />
+                            </div>
+                            @if (TempData["mensaje"] != null)
+                            {
+                                <div id="mensaje" class="alert alert-success">@TempData["mensaje"]</div>
+
+                                <script>
+                                  
+                                    setTimeout(function () {
+                                        document.getElementById("mensaje").style.display = "none";
+                                    }, 5000);
+                                </script>
+                            }
+
+
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <lu>
+        <li>
+            <a asp-action="Index" asp-area="">
+                <button type="button" class="btn btn-block btn btn-secondary rounded-bottom text-white">Volver Pagina de Inicio</button>
+            </a>
+       </li>
+       <li>      
+            <a asp-action="Perfil" asp-area="">
+                <button type="button" class="btn btn-block btn btn-primary rounded-bottom text-white">Volver Perfil de usuario</button>
+            </a>
+        </li>
+    </lu>

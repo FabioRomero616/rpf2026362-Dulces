@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Chocomundo";
+}
+
+@model Chocoworld.Models.Cliente
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@User.Identity.Name</h5>
+                <p class="text-muted mb-1">@Model.Email</p>
+                        <p class="text-muted mb-4"></p>
+                        <div class="d-flex justify-content-center mb-2">
+                    <a asp-area="" asp-controller="Home" asp-action="Rdireccion">
+                        <button type="button" class="btn btn-primary">Agregar Direccion</button>
+                        </a>
+                    <a asp-area="" asp-controller="Home" asp-action="Cambiarcontrasena">
+                        <button type="button" class="btn btn-secondary">Cambiar contraseña</button>
+                    </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                <img class="img-fluid" src="~/img/logo chocomundo.jpeg" alt="">
+
+                 </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Nombre</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Model.Nombre</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Correo Electronico</p>
+                            </div>
+                            <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Email</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Telefono</p>
+                            </div>
+                            <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Telefono</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ciudad</p>
+                            </div>
+                            <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Direccion.Ciudad</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Direccion</p>
+                            </div>
+                            <div class="col-sm-9">
+                        <p class="text-muted mb-0">@Model.Direccion.Calle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        <a asp-area="" asp-controller="Home" asp-action="ComentarProducto">
+            <button type="button" class="btn btn-warning">Comentar Producto</button>
+        </a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

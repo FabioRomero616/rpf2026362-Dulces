@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Chocomundo";
+}
+@model Chocoworld.Models.CambiarContrasenaViewModel
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="reservation position-relative overlay-top overlay-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6 my-5 my-lg-0">
+                    <div class="p-5">
+                        <div class="mb-4">
+                            <h1 class="text-white">Cambia tu contraseña</h1>
+
+                        </div>
+                        <img class="img-fluid" src="~/img/logo chocomundo.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+
+
+                        
+
+                        <h2 class="text-white">Cambiar Contraseña</h2>
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ContrasenaActual)
+                                @Html.PasswordFor(model => model.ContrasenaActual, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ContrasenaActual, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NuevaContrasena)
+                                @Html.PasswordFor(model => model.NuevaContrasena, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NuevaContrasena, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ConfirmarNuevaContrasena)
+                                @Html.PasswordFor(model => model.ConfirmarNuevaContrasena, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmarNuevaContrasena, "", new { @class = "text-danger" })
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                            @if (TempData["mensaje"] != null)
+                            {
+                                <div id="mensaje" class="alert alert-success">@TempData["mensaje"]</div>
+
+                                <script>
+
+                                    setTimeout(function () {
+                                        document.getElementById("mensaje").style.display = "none";
+                                    }, 2000);
+                                </script>
+                            }
+                        }
+
+                        @section Scripts {
+                            @{
+                                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                            }
+                        }
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<lu>
+    <li>
+        <a asp-action="Index" asp-area="">
+            <button type="button" class="btn btn-block btn btn-secondary rounded-bottom text-white">Volver Pagina de Inicio</button>
+        </a>
+    </li>
+    <li>
+        <a asp-action="Perfil" asp-area="">
+            <button type="button" class="btn btn-block btn btn-primary rounded-bottom text-white">Volver Perfil de usuario</button>
+        </a>
+    </li>
+</lu>

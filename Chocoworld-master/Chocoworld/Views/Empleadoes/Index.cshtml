@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Chocoworld.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h1>Empleados</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Crear Empleado</a>
+</p>
+<form asp-controller="Empleadoes" asp-action="Index">
+    <p>
+        <label class="form-label" for="form1">Buscar</label>
+        <input type="search" id="form1" name="buscar" class="form-control" />
+        <input type="submit" value="Buscar" class="btn btn-primary m-1" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.EmpleadoId">Editar</a> |
+                    <a asp-action="Details" class="btn btn-warning" asp-route-id="@item.EmpleadoId">Detalles</a>
+                    @if(User.IsInRole("Administrador")){
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.EmpleadoId">Eliminar</a>
+                    }
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
